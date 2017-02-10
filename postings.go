@@ -32,6 +32,13 @@ func NewIndex(stop []TermID) *Index {
 	return &Index{stop: mstop}
 }
 
+func (idx *Index) Empty() {
+	for i := range idx.p {
+		idx.p[i] = idx.p[i][:0]
+	}
+	idx.nextDocID = 0
+}
+
 func (idx *Index) AddDocument(terms []TermID) DocID {
 
 	id := idx.nextDocID
